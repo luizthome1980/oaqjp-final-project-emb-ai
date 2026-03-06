@@ -2,7 +2,7 @@
 from flask import Flask, request, redirect, render_template, url_for
 
 # Instantiate Flask functionality
-app = Flask(__name__)
+app = Flask("EmotionDetection")
 
 @app.route("/") 
 def render_index_page(): 
@@ -10,23 +10,23 @@ def render_index_page():
 
 @app.route("/emotionDetector") 
 def emot_detector(): 
-	# Retrieve the text to analyze from the request arguments 
-	text_to_analyze = request.args.get('textToAnalyze')
+    # Retrieve the text to analyze from the request arguments 
+    text_to_analyze = request.args.get('textToAnalyze')
 
-	# Pass the text to the emotion_detector function and store the response 
-	response = emotion_detector(text_to_analyze)
+    # Pass the text to the emotion_detector function and store the response 
+    response = emotion_detector(text_to_analyze)
 
-	# Extract the emotions from the response 
-	anger = response['anger'] 
-	disgust = response['disgust']
+    # Extract the emotions from the response 
+    anger = response['anger']
+    disgust = response['disgust']
     fear = response['fear']
     joy = response['joy']
     sadness = response['sadness']
     dominant_emotion = response['dominant_emotion']
     message = f"For the given statement, the system response is 'anger': {anger}, 'disgust': {disgust}, 'fear': {fear}, 'joy': {joy} and 'sadness': {sadness}. The dominant emotion is {dominant_emotion}."
 
-	# Return a formatted string with the sentiment label and score 
-	return message
+    # Return a formatted string with the sentiment label and score
+    return message
 
-if name == "main": 
-	app.run(host="0.0.0.0", port=5000)
+if __name__ == "__main__": 
+    app.run(host="0.0.0.0", port=5000)
